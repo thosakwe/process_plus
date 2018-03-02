@@ -9,4 +9,10 @@ void main() {
     expect(manager.canRun('foo'), true);
     expect(manager.canRun('foo'), false);
   });
+
+  test('kill', () {
+    manager..enqueueKill(true)..enqueueKill(false);
+    expect(manager.killPid(0), true);
+    expect(manager.killPid(0), false);
+  });
 }
