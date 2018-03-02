@@ -1,4 +1,10 @@
 name: process_plus
+version: 1.0.0
+description: Helpers classes and added functionality for `package:process`.
+author: Tobe O <thosakwe@gmail.com>
+homepage: https://github.com/thosakwe/process_plus
+environment:
+  sdk: ">=1.8.0 <2.0.0"
 dependencies:
   pool: ^1.0.0
   process: ^2.0.0
