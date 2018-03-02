@@ -35,8 +35,9 @@ void main() {
   group('queue process result', () {
     setUp(() async {
       manager..enqeue(r)..enqeue(r);
-      expect(manager.runSync(['foo']), r);
-      expect(await manager.run(['foo']), r);
     });
+
+    test('runSync', () => expect(manager.runSync(['foo']), r));
+    test('run', () async => expect(await manager.run(['foo']), r));
   });
 }
