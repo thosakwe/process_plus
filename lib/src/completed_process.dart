@@ -14,13 +14,16 @@ class CompletedProcess extends Process {
   int get pid => processResult.pid;
 
   @override
-  IOSink get stdin => throw new UnsupportedError('A CompletedProcess has no stdin.');
+  IOSink get stdin =>
+      throw new UnsupportedError('A CompletedProcess has no stdin.');
 
   @override
-  Stream<List<int>> get stderr => processResult.stderr;
+  Stream<List<int>> get stderr =>
+      new Stream.fromIterable([processResult.stderr]);
 
   @override
-  Stream<List<int>> get stdout => processResult.stdout;
+  Stream<List<int>> get stdout =>
+      new Stream.fromIterable([processResult.stdout]);
 
   @override
   Future<int> get exitCode async => processResult.exitCode;
