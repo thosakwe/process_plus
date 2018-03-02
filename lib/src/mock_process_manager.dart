@@ -41,7 +41,7 @@ class MockProcessManager extends ProcessManager {
       bool runInShell: false,
       Encoding stdoutEncoding: SYSTEM_ENCODING,
       Encoding stderrEncoding: SYSTEM_ENCODING}) async {
-    return _run.removeLast();
+    return _run.removeFirst();
   }
 
   @override
@@ -52,17 +52,17 @@ class MockProcessManager extends ProcessManager {
       bool runInShell: false,
       Encoding stdoutEncoding: SYSTEM_ENCODING,
       Encoding stderrEncoding: SYSTEM_ENCODING}) {
-    return _run.removeLast();
+    return _run.removeFirst();
   }
 
   @override
   bool canRun(dynamic executable, {String workingDirectory}) {
-    return _canRun.isEmpty || _canRun.removeLast();
+    return _canRun.isEmpty || _canRun.removeFirst();
   }
 
   @override
   bool killPid(int pid, [ProcessSignal signal = ProcessSignal.SIGTERM]) {
-    return _kill.isEmpty || _kill.removeLast();
+    return _kill.isEmpty || _kill.removeFirst();
   }
 
   @override
@@ -71,7 +71,7 @@ class MockProcessManager extends ProcessManager {
       String> environment, bool includeParentEnvironment: true, bool runInShell: false, ProcessStartMode mode: ProcessStartMode
       .NORMAL}) async {
     if (_process.isNotEmpty)
-      return _process.removeLast();
-    return new CompletedProcess(_run.removeLast());
+      return _process.removeFirst();
+    return new CompletedProcess(_run.removeFirst());
   }
 }
