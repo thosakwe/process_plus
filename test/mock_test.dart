@@ -15,4 +15,8 @@ void main() {
     expect(manager.killPid(0), true);
     expect(manager.killPid(0), false);
   });
+
+  test('queue process', () async {});
+
+  group('queue process result', () {});
 }
