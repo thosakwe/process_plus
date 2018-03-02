@@ -5,6 +5,7 @@ import 'package:pool/pool.dart';
 import 'package:process/process.dart';
 import 'forwarding_process_manager.dart';
 
+/// A [ProcessManager] that uses a [Pool] to limit to the max amount of concurrently-running processes.
 class PooledProcessManager extends ForwardingProcessManager {
   final Pool _pool;
 
