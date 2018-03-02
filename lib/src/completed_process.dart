@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+/// A [Process] implementation that simply outputs the result of a [CompletedProcess].
 class CompletedProcess extends Process {
   final ProcessResult processResult;
 
@@ -12,9 +13,8 @@ class CompletedProcess extends Process {
   @override
   int get pid => processResult.pid;
 
-  // TODO: Get a stdin
   @override
-  IOSink get stdin => null;
+  IOSink get stdin => throw new UnsupportedError('A CompletedProcess has no stdin.');
 
   @override
   Stream<List<int>> get stderr => processResult.stderr;

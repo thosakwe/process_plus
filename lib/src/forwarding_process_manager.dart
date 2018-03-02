@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:pool/pool.dart';
 import 'package:process/process.dart';
-import 'package:process/record_replay.dart';
 
+/// A simple [ProcessManager] that delegates to another one.
 class ForwardingProcessManager implements ProcessManager {
   final ProcessManager delegate;
 

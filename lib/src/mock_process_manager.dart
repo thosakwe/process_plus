@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:process/process.dart';
 import 'completed_process.dart';
 
+/// A [ProcessManager] that can enqueue results in advance, rather than
+/// actually spawning OS processes.
 class MockProcessManager extends ProcessManager {
   final Queue<ProcessResult> _run = new Queue();
   final Queue<Process> _process = new Queue();
