@@ -1,0 +1,6 @@
+name: process_plus
+dependencies:
+  pool: ^1.0.0
+  process: ^2.0.0
+dev_dependencies:
+  test: ^0.12.0
