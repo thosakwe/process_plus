@@ -4,13 +4,22 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:process/process.dart';
 import 'completed_process.dart';
-import 'function_process.dart';
 
 class MockProcessManager extends ProcessManager {
   final Queue<ProcessResult> _run = new Queue();
   final Queue<Process> _process = new Queue();
   final Queue<bool> _canRun = new Queue();
   final Queue<bool> _kill = new Queue();
+
+  /// Adds an existing [ProcessResult] to the queue.
+  void enqeue(ProcessResult result) {
+    _run.add(result);
+  }
+
+  /// Adds a live [Process] instance to the queue.
+  void enqeueProcess(Process result) {
+    _process.add(result);
+  }
 
   @override
   Future<ProcessResult> run(List<dynamic> command,
