@@ -21,6 +21,16 @@ class MockProcessManager extends ProcessManager {
     _process.add(result);
   }
 
+  /// Enqueues a result for [canRun].
+  void enqueueCanRun(bool result) {
+    _canRun.add(result);
+  }
+
+  /// Enqueues a result for [kill].
+  void enqueueKill(bool result) {
+    _kill.add(result);
+  }
+
   @override
   Future<ProcessResult> run(List<dynamic> command,
       {String workingDirectory,
