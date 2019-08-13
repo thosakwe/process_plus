@@ -13,9 +13,9 @@ class ForwardingProcessManager implements ProcessManager {
   Future<Process> start(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      ProcessStartMode mode: ProcessStartMode.NORMAL}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      ProcessStartMode mode = ProcessStartMode.normal}) {
     return delegate.start(command,
         workingDirectory: workingDirectory,
         environment: environment,
@@ -28,10 +28,10 @@ class ForwardingProcessManager implements ProcessManager {
   Future<ProcessResult> run(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      Encoding stdoutEncoding: SYSTEM_ENCODING,
-      Encoding stderrEncoding: SYSTEM_ENCODING}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      Encoding stdoutEncoding = systemEncoding,
+      Encoding stderrEncoding = systemEncoding}) {
     return delegate.run(command,
         workingDirectory: workingDirectory,
         environment: environment,
@@ -45,10 +45,10 @@ class ForwardingProcessManager implements ProcessManager {
   ProcessResult runSync(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      Encoding stdoutEncoding: SYSTEM_ENCODING,
-      Encoding stderrEncoding: SYSTEM_ENCODING}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      Encoding stdoutEncoding = systemEncoding,
+      Encoding stderrEncoding = systemEncoding}) {
     return delegate.runSync(command,
         workingDirectory: workingDirectory,
         environment: environment,
@@ -63,7 +63,7 @@ class ForwardingProcessManager implements ProcessManager {
   }
 
   @override
-  bool killPid(int pid, [ProcessSignal signal = ProcessSignal.SIGTERM]) {
+  bool killPid(int pid, [ProcessSignal signal = ProcessSignal.sigterm]) {
     return delegate.killPid(pid, signal);
   }
 }

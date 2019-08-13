@@ -8,10 +8,10 @@ import 'completed_process.dart';
 /// A [ProcessManager] that can enqueue results in advance, rather than
 /// actually spawning OS processes.
 class MockProcessManager extends ProcessManager {
-  final Queue<ProcessResult> _run = new Queue();
-  final Queue<Process> _process = new Queue();
-  final Queue<bool> _canRun = new Queue();
-  final Queue<bool> _kill = new Queue();
+  final Queue<ProcessResult> _run = Queue();
+  final Queue<Process> _process = Queue();
+  final Queue<bool> _canRun = Queue();
+  final Queue<bool> _kill = Queue();
 
   /// Adds an existing [ProcessResult] to the queue.
   void enqeue(ProcessResult result) {
@@ -37,10 +37,10 @@ class MockProcessManager extends ProcessManager {
   Future<ProcessResult> run(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      Encoding stdoutEncoding: SYSTEM_ENCODING,
-      Encoding stderrEncoding: SYSTEM_ENCODING}) async {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      Encoding stdoutEncoding = systemEncoding,
+      Encoding stderrEncoding = systemEncoding}) async {
     return _run.removeFirst();
   }
 
@@ -48,10 +48,10 @@ class MockProcessManager extends ProcessManager {
   ProcessResult runSync(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      Encoding stdoutEncoding: SYSTEM_ENCODING,
-      Encoding stderrEncoding: SYSTEM_ENCODING}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      Encoding stdoutEncoding = systemEncoding,
+      Encoding stderrEncoding = systemEncoding}) {
     return _run.removeFirst();
   }
 
@@ -61,17 +61,18 @@ class MockProcessManager extends ProcessManager {
   }
 
   @override
-  bool killPid(int pid, [ProcessSignal signal = ProcessSignal.SIGTERM]) {
+  bool killPid(int pid, [ProcessSignal signal = ProcessSignal.sigterm]) {
     return _kill.isEmpty || _kill.removeFirst();
   }
 
   @override
-  Future<Process> start(List<dynamic> command, {String workingDirectory, Map<
-      String,
-      String> environment, bool includeParentEnvironment: true, bool runInShell: false, ProcessStartMode mode: ProcessStartMode
-      .NORMAL}) async {
-    if (_process.isNotEmpty)
-      return _process.removeFirst();
-    return new CompletedProcess(_run.removeFirst());
+  Future<Process> start(List<dynamic> command,
+      {String workingDirectory,
+      Map<String, String> environment,
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      ProcessStartMode mode = ProcessStartMode.normal}) async {
+    if (_process.isNotEmpty) return _process.removeFirst();
+    return CompletedProcess(_run.removeFirst());
   }
 }

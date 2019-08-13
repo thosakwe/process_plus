@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:process_plus/process_plus.dart';
 import 'package:test/test.dart';
-import 'completed_process_test.dart';
+import 'completed_process.dart';
 
 void main() {
   var r = ProcessResult(0, 0, hello, world);

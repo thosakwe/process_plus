@@ -12,22 +12,22 @@ A simple `ProcessManager` that delegates to another one.
 Typically used as a base class to extend functionality.
 
 ```dart
-var manager = new ForwwardingProcessManager(const LocalProcessManager());
+var manager = ForwwardingProcessManager(const LocalProcessManager());
 ```
 
 ## PooledProcessManager
 A `ProcessManager` that uses a `Pool` to limit to the max amount of concurrently-running processes.
 
 ```dart
-var manager = new PooledProcessManager(const LocalProcessManager(), Platform.numberOfProcessors);
+var manager = PooledProcessManager(const LocalProcessManager(), Platform.numberOfProcessors);
 ```
 
 ## MockProcessManager
 A `ProcessManager` that can enqueue results in advance, rather than actually spawning OS processes.
 
 ```dart
-var manager = new MockProcessManager();
-manager.enqueue(new ProcessResult(0, 1337, stdout, stderr));
+var manager = MockProcessManager();
+manager.enqueue(ProcessResult(0, 1337, stdout, stderr));
 
 var p = await manager.run(['foo', '--bar=baz']);
 await p.exitCode; // 1337
@@ -37,6 +37,6 @@ await p.exitCode; // 1337
 A `Process` implementation that simply outputs the result of a `CompletedProcess`.
 
 ```dart
-var p = new CompletedProcess(new ProcessResult(0, 1337, stdout, stderr));
+var p = CompletedProcess(ProcessResult(0, 1337, stdout, stderr));
 await p.exitCode; // 1337
 ```

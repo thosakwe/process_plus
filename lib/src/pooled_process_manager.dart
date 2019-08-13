@@ -11,7 +11,7 @@ class PooledProcessManager extends ForwardingProcessManager {
 
   PooledProcessManager(ProcessManager delegate, int maxConcurrentProcesses,
       {Duration timeout})
-      : _pool = new Pool(maxConcurrentProcesses, timeout: timeout),
+      : _pool = Pool(maxConcurrentProcesses, timeout: timeout),
         super(delegate);
 
   Future close() => _pool.close();
@@ -20,9 +20,9 @@ class PooledProcessManager extends ForwardingProcessManager {
   Future<Process> start(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      ProcessStartMode mode: ProcessStartMode.NORMAL}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      ProcessStartMode mode = ProcessStartMode.normal}) {
     return _pool.withResource(() {
       return delegate.start(command,
           workingDirectory: workingDirectory,
@@ -37,10 +37,10 @@ class PooledProcessManager extends ForwardingProcessManager {
   Future<ProcessResult> run(List<dynamic> command,
       {String workingDirectory,
       Map<String, String> environment,
-      bool includeParentEnvironment: true,
-      bool runInShell: false,
-      Encoding stdoutEncoding: SYSTEM_ENCODING,
-      Encoding stderrEncoding: SYSTEM_ENCODING}) {
+      bool includeParentEnvironment = true,
+      bool runInShell = false,
+      Encoding stdoutEncoding = systemEncoding,
+      Encoding stderrEncoding = systemEncoding}) {
     return _pool.withResource(() {
       return delegate.run(command,
           workingDirectory: workingDirectory,

@@ -8,22 +8,22 @@ class CompletedProcess extends Process {
   CompletedProcess(this.processResult);
 
   @override
-  bool kill([ProcessSignal signal = ProcessSignal.SIGTERM]) => true;
+  bool kill([ProcessSignal signal = ProcessSignal.sigterm]) => true;
 
   @override
   int get pid => processResult.pid;
 
   @override
   IOSink get stdin =>
-      throw new UnsupportedError('A CompletedProcess has no stdin.');
+      throw UnsupportedError('A CompletedProcess has no stdin.');
 
   @override
   Stream<List<int>> get stderr =>
-      new Stream.fromIterable([processResult.stderr]);
+      Stream.fromIterable([processResult.stderr as List<int>]);
 
   @override
   Stream<List<int>> get stdout =>
-      new Stream.fromIterable([processResult.stdout]);
+      Stream.fromIterable([processResult.stdout as List<int>]);
 
   @override
   Future<int> get exitCode async => processResult.exitCode;
